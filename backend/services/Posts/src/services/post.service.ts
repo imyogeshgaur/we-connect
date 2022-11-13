@@ -12,8 +12,6 @@ export class PostsService{
     }
     async getPostById(_id:string){
         const post = await Post.findById(_id);
-        console.log(post);
-        
         return post;
     }
 

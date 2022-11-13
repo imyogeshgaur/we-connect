@@ -47,7 +47,7 @@ const Auth = () => {
       const data = await res.json();
       document.cookie = `jwt=${data.token}`
       alert("Logged In !!!")
-      navigate("/post")
+      navigate("/profile")
       setuserName("")
       setemail("")
       setpassword("")

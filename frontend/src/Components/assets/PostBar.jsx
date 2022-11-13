@@ -11,12 +11,13 @@ const PostBar = (props) => {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
-                            <Link className="navbar-brand mx-auto" to="/">{props.name===undefined ? "" : `Welcome ${props.name}`}</Link>
+                            <Link className="navbar-brand mx-auto" to="/">{props.name===undefined ? "" : `Welcome ${props.name} To We Connect`}</Link>
                         </ul>
                     </div>
                     <Link to="/addPost">
-                        <i className={props.mode === 'light' ? "icon-light fa-solid fa-square-plus me-4 fa-2x" : "fa-solid fa-square-plus me-4 fa-2x icon-dark"}></i>
+                        <i className={"icon-light fa-solid fa-square-plus me-4 fa-2x"}></i>
                     </Link>
+                    <i className={"icon-light fa-solid fa-user me-4 fa-2x"}></i>
                 </div>
             </nav>
         </>

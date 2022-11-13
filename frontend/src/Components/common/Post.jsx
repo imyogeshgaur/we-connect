@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import PostBar from '../assets/PostBar';
+import PostViewBar from '../assets/PostViewBar';
 
 const Post = () => {
     const param = useParams();
@@ -12,6 +12,7 @@ const Post = () => {
         fetch("http://localhost:5000/auth/getLoginUser/" + document.cookie.split('=')[1])
             .then(res => res.json())
             .then(data => setdata(data))
+            .catch(err=>console.log(err))
 
         //Find Post By Creator 
         fetch("http://localhost:5000/posts/findById/" + param.id)
@@ -22,7 +23,7 @@ const Post = () => {
     
     return (
         <>
-            <PostBar name={data.userName} />
+            <PostViewBar name={data.userName} />
             <div className="mt-3" style={{display:"flex",justifyContent:"center"}}>
             <div className='card card-light col col-md-4 col-lg-4 col-sm-4 col-xs-12'>
                 <img src={post.image} class="card-img-top" alt="data" height="435px"/>

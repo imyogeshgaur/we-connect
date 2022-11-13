@@ -32,12 +32,6 @@ const AddPost = () => {
         <>
             <NavBar  />
             <div className={"card mx-auto mt-4"} style={{ width: "38rem" }}>
-                {/* <div className="wrapper mt-3">
-                    <div className="file-upload">
-                        <input type="file" id="userInput"/>
-                        <i className="fa-solid fa-user"></i>
-                    </div>
-                </div> */}
                 <div className={"imageUpload-light"}>
                     <input type="file" name="" id="postImgInput" onChange={(e) => setfile(e.target.files[0])} />
                     <i className={"fa-solid fa-image fa-3x mt-5"} style={{ display: 'flex', justifyContent: "center" }}></i>

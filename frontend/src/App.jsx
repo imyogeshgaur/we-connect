@@ -4,6 +4,7 @@ import Auth from "./Components/auth/Auth"
 import Profile from "./Components/common/Profile"
 import AddPost from "./Components/common/AddPost"
 import Post from "./Components/common/Post"
+import ViewProfile from "./Components/common/ViewProfile"
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/addPost" element={<AddPost />} />
         <Route path="/post/:id" element={<Post />} />
+        <Route path="/viewDetail" element={<ViewProfile />} />
       </Routes>
     </>
   )

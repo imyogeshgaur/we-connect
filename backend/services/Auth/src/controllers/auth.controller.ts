@@ -1,9 +1,23 @@
 import { Request, Response } from "express";
 import { AuthService } from "../services/auth.service";
-
+import axios from "axios";
 
 export class AuthController {
     protected authService = new AuthService();
+    async getOtherDetails(authId:string){
+        try {
+            try {
+                const response = await axios.get(process.env.GET_USER_URI as string + authId)
+                const data = await response.data;
+                return data;
+            } catch (error) {
+                console.log(error);
+            }
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
     async signup(req: Request, res: Response) {
         try {
             const body = req.body;
@@ -63,7 +77,8 @@ export class AuthController {
         try {
             const id = req.params.id;
             const user = await this.authService.getSingleUserFromId(id);
-            return res.status(200).send(user);
+            const userNext = await this.getOtherDetails(id);
+            return res.status(200).send({auth:user,user:userNext});
         } catch (error) {
             console.log(error);
             return res.status(500).send("User's Service : Internal Server Error !!!");

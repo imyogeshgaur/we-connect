@@ -78,7 +78,7 @@ label {
     align-items: center;  
     border:4px solid #ff5e62;
     overflow:hidden;
-    background-image: linear-gradient(to right, #ff9966, #ff5e62);
+    background: linear-gradient(to right, #ff9966, #ff5e62);
     background-size: 100% 200%;
     transition: all 1s;
     color: #FFFFFF;

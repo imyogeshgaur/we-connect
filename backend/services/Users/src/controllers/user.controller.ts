@@ -1,22 +1,9 @@
 import { Request, Response } from "express";
 import { UsersService } from "../services/user.service";
-import dotenv from "dotenv";
-import * as path from "path"
-dotenv.config({path:path.resolve("./src/env/user.env")});
-import axios from "axios";
+
 
 export class UserController {
     protected userService = new UsersService();
-
-    async getPostsForUser(email: string) {
-        try {
-            const response = await axios.get(process.env.GET_POST_URI as string + email)
-            const data = await response.data;
-            return data;
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     async getAllUsers(req: Request, res: Response) {
         try {
@@ -36,14 +23,8 @@ export class UserController {
             const email = req.params.email;
             const user = await this.userService.getSingleUser(email);
             if (user) {
-                const post = await this.getPostsForUser(email)
-                if (post) {
-                    user.Post = post;
-                    return res.status(200).send(user);
-                } else {
-                    return res.status(200).send(user);
-                }
-            } else {
+                return res.status(200).send(user);
+             } else {
                 return res.status(200).send("No User Found !!!")
             }
         } catch (error) {
@@ -62,9 +43,9 @@ export class UserController {
     }
     async updateUser(req: Request, res: Response) {
         try {
-            const email = req.params.email;
+            const id = req.params.id;
             const data = req.body;
-            const updateResult = await this.userService.updateUser(email, data);
+            const updateResult = await this.userService.updateUser(id, data);
             if (updateResult.modifiedCount) {
                 return res.status(200).send("User Updated !!!")
             } else {
@@ -91,9 +72,9 @@ export class UserController {
     }
     async getUserFromId(req: Request, res: Response) {
         try {
-            const id = req.params.id;
-            const user = this.userService.getSingleUserFromId(id);
-            return user;
+            const id = req.params.authId;
+            const user = await this.userService.getSingleUserFromId(id);
+            return res.status(200).send(user)
         } catch (error) {
             console.log(error);
             return res.status(500).send("User's Service : Internal Server Error !!!");

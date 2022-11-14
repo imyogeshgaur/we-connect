@@ -15,7 +15,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/addPost" element={<AddPost />} />
         <Route path="/post/:id" element={<Post />} />
-        <Route path="/viewDetail" element={<ViewProfile />} />
+        <Route path="/viewDetail/:id" element={<ViewProfile />} />
       </Routes>
     </>
   )

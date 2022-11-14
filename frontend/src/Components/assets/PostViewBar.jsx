@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 
 const PostViewBar = (props) => {
@@ -11,13 +10,14 @@ const PostViewBar = (props) => {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
-                            <Link className="navbar-brand mx-auto" to="/">{props.name === undefined ? "" : `Welcome ${props.name} To We Connect`}</Link>
+                            <p className="navbar-brand mx-auto">{props.name === undefined ? "" : `Welcome ${props.name} To We Connect`}</p>
                         </ul>
                     </div>
                     <div className="dropdown">
                         <i className={"icon-light fa-solid fa-user me-4 fa-2x dropdown-toggle"} data-bs-toggle="dropdown" aria-expanded="false" />
                         <ul className="dropdown-menu card-light" style={{ marginLeft: "-5rem", marginTop: "0.6rem" }}>
-                            <Link to="/viewDetail" style={{textDecoration:"none"}}><li><button className="dropdown-item">View Profile</button></li></Link>
+                            <Link to="/profile" style={{textDecoration:"none"}}><li><button className="dropdown-item">View Posts</button></li></Link>
+                            <Link to={props.secondOptionURL} style={{textDecoration:"none"}}><li><button className="dropdown-item">{props.secondOption}</button></li></Link>
                             <li><button className="dropdown-item">Log Out</button></li>
                         </ul>
                     </div>

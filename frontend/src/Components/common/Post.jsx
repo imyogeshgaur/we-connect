@@ -23,10 +23,10 @@ const Post = () => {
     
     return (
         <>
-            <PostViewBar name={data.userName} />
+            <PostViewBar name={`@${data.userName}`} />
             <div className="mt-3" style={{display:"flex",justifyContent:"center"}}>
             <div className='card card-light col col-md-4 col-lg-4 col-sm-4 col-xs-12'>
-                <img src={post.image} class="card-img-top" alt="data" height="435px"/>
+                <img src={post.image} class="card-img-top" alt="data" height="235px"/>
                     <div class="card-body">
                         <h5 class="card-title">{post.hashtag}</h5>
                         <p class="card-text">{post.caption}</p>

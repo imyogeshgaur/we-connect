@@ -10,17 +10,18 @@ export class UsersService{
         return user;
     }
     async getSingleUserFromId(id:string){
-        const user = await User.findById(id)
+        const user = await User.findOne({authId:id},{_id:0,authId:0,__v:0})
         return user;
     }
     async createUser(body:any){
-        const{name,email,phone,location,company,position} = body;
-        const newUser = new User({name,email,phone,location,company,position});
+        const{name,phone,location,company,position,authId} = body;
+        await User.init()
+        const newUser = new User({name,phone,location,company,position,authId});
         const user=  await newUser.save();
         return user;
     }
-    async updateUser(email:string,data:any){
-        const user = await User.findOne({email})
+    async updateUser(id:string,data:any){
+        const user = await User.findOne({authId:id})
         if(user){
           const result = await user.updateOne(data)
           return result;

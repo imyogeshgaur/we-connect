@@ -48,7 +48,7 @@ export class AuthService {
         }
     }
     async getSingleUserFromId(id:string){
-        const user = await Auth.findOne({_id:id})
+        const user = await Auth.findOne({_id:id},{password:0,__v:0})
         return user;
     }
     async decodetoken(token:any){

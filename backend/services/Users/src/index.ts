@@ -31,7 +31,7 @@ app.get("/get/:email", async(req, res) => {
         console.log("User's Service : Global Error " + error);
     }
 })
-app.get("/getUser/:id", async(req, res) => {
+app.get("/getUser/:authId", async(req, res) => {
     try {
         const userController = new UserController();
         await userController.getUserFromId(req, res);
@@ -47,9 +47,9 @@ app.post("/create", async(req, res) => {
         console.log("User's Service : Global Error " + error);
     }
 })
-app.put("/update/:email", async(req, res) => {
+app.put("/update/:id", async(req, res) => {
     try {
-        const userController = new UserController();     
+        const userController = new UserController(); 
         await userController.updateUser(req, res);
     } catch (error) {
         console.log("Global Error " + error);

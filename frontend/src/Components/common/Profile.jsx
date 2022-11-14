@@ -22,7 +22,7 @@ const Profile = () => {
 
     return (
         <>
-            <PostBar name={data.userName} />
+            <PostBar name={`@${data.userName}`}/>
             <h1 className="text-center">{posts.length === 0 ? "No Post To Display" : " "}</h1>
             <div className="row mt-4">
                 {
@@ -32,7 +32,7 @@ const Profile = () => {
                                 <div className="col col-md-4 col-lg-4 col-sm-4 col-xs-12" key={val._id}>
                                     <div className={"card card-light mt-4"} key={val._id}>
                                         <Link to={`/post/${val._id}`} key={val._id}>
-                                            <img src={val.image} alt="data" className='card-img-top' height="435px" />
+                                            <img src={val.image} alt="data" className='card-img-top' height="235px" />
                                         </Link>
                                     </div>
                                 </div>

@@ -34,7 +34,8 @@ export class UserController {
     }
     async createUser(req: Request, res: Response) {
         try {
-            const userToCreate = await this.userService.createUser(req.body);
+            const file = process.env.USER_PROFILE_PREFIX as string + req.file?.filename;
+            const userToCreate = await this.userService.createUser(file,req.body);
             return res.status(200).send(userToCreate);
         } catch (error) {
             console.log(error);
@@ -44,8 +45,11 @@ export class UserController {
     async updateUser(req: Request, res: Response) {
         try {
             const id = req.params.id;
-            const data = req.body;
-            const updateResult = await this.userService.updateUser(id, data);
+            let data = req.body;
+            const file = process.env.USER_PROFILE_PREFIX as string + req.file?.filename;
+            data.image = file
+            const actData = {data,image:file}
+            const updateResult = await this.userService.updateUser(id, actData);
             if (updateResult.modifiedCount) {
                 return res.status(200).send("User Updated !!!")
             } else {

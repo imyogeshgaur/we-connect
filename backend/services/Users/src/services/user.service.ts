@@ -13,10 +13,10 @@ export class UsersService{
         const user = await User.findOne({authId:id},{_id:0,authId:0,__v:0})
         return user;
     }
-    async createUser(body:any){
+    async createUser(file:any, body:any){
         const{name,phone,location,company,position,authId} = body;
         await User.init()
-        const newUser = new User({name,phone,location,company,position,authId});
+        const newUser = new User({name,phone,location,company,position,image:file,authId});
         const user=  await newUser.save();
         return user;
     }

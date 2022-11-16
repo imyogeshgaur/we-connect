@@ -19,7 +19,7 @@ app.use(function (req, res, next) {
     next();
   });
 
-app.use("/static/post",express.static(path.join(process.cwd(),"src/images/post")))
+app.use("/static/post",express.static(path.join(process.cwd(),"src/images")))
 
   app.get("/list", async(req, res) => {
     try {
@@ -46,7 +46,7 @@ app.get("/findById/:post_id", async(req, res) => {
     }
 })
 
-app.post("/create",uploadPost,async(req, res) => {
+app.post("/createPost",uploadPost,async(req, res) => {
     try {
         const postController = new PostController();
         await postController.createPost(req, res);

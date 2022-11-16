@@ -122,7 +122,9 @@ label {
 .post-add-dark{
   background: linear-gradient( #ad5389, #3c1053);
 }
-
+.hide{
+  display: none;
+}
 /* Media Query for mobile  */
 @media only screen and (max-width: 375px) {
   .Auth-form {

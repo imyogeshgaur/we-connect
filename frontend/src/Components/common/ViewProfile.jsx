@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import PostViewBar from '../assets/PostViewBar'
 
-
 const ViewProfile = () => {
   const [data, setdata] = useState("")
   const [userName, setuserName] = useState("")
@@ -13,6 +12,8 @@ const ViewProfile = () => {
   const [location, setlocation] = useState("")
   const [company, setcompany] = useState("")
   const [position, setposition] = useState("")
+  const [image, setimage] = useState("")
+  const [file, setfile] = useState("")
   const [user, setuser] = useState("")
   useEffect(() => {
     fetch("http://localhost:5000/auth/getLoginUser/" + document.cookie.split('=')[1])
@@ -31,82 +32,102 @@ const ViewProfile = () => {
         setcompany(data.user.company)
         setposition(data.user.position)
         setuser(data.user)
+        if (data.user.image) {
+          setimage(data.user.image)
+          document.getElementById("template1").classList.add("hide")
+        } else {
+          document.getElementById("template2").classList.add("hide")
+        }
       })
   }, [param.id])
 
   const handleSubmit = async () => {
     try {
+      const formData = new FormData();
+      formData.append("profile", file);
+      formData.append("name", name)
+      formData.append("phone", phone)
+      formData.append("location", location)
+      formData.append("company", company)
+      formData.append("position", position)
+      formData.append("authId", param.id);
       await fetch("http://localhost:5000/users/create", {
         mode: "cors",
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({authId:param.id, name, phone, location, company, position })
+        body: formData
       })
       alert("Details Updated !!!")
       window.location.reload(false);
     } catch (error) {
       console.log(error);
-      
     }
   }
   const handleUpdate = async () => {
     try {
+      const formData = new FormData();
+      formData.append("profile", file);
+      formData.append("name", name)
+      formData.append("phone", phone)
+      formData.append("location", location)
+      formData.append("company", company)
+      formData.append("position", position)
+      formData.append("authId", param.id);
       await fetch("http://localhost:5000/users/update/" + param.id, {
         mode: "cors",
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({authId:param.id, name, phone, location, company, position })
+        body: formData
       })
       alert("Details Updated !!!")
       window.location.reload(false);
     } catch (error) {
       console.log(error);
-      
     }
   }
 
   return (
     <>
       <PostViewBar name={`@${data.userName}`} secondOption={"Add Post"} secondOptionURL={"/addPost"} />
-      <div class="card mx-auto mt-4" style={{ width: "48rem" }}>
-        <div class="card-body">
-          <div className="wrapper mt-3">
+      <div className="card mx-auto mt-4" style={{ width: "48rem" }}>
+        <div className="card-body">
+          <div className="wrapper mt-3" id='template1'>
             <div className="file-upload">
-              <input type="file" id="userInput" />
+              <input type="file" id="userInput" onChange={(e) => setfile(e.target.files[0])} />
               <i className="fa-solid fa-user"></i>
             </div>
           </div>
-          <h5 class="card-title text-center">{userName} Profile</h5>
-          <div class="row mt-2">
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Enter Name" value={name} onChange={(e) => { setname(e.target.value) }} />
-            </div>
-            <div class="col">
-              <input type="text" class="form-control" value={email} disabled={true} />
+          <div className="wrapper mt-3" id='template2'>
+            <div className="file-upload">
+              <img src={image} alt="" width="300" />
+              <input type="file" id="userInput" onChange={(e) => setfile(e.target.files[0])} />
             </div>
           </div>
-          <div class="row mt-4">
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Enter Phone" aria-label="Enter Phone" value={phone} onChange={(e) => { setphone(e.target.value) }} />
+          <h5 className="card-title text-center">{userName} Profile</h5>
+          <div className="row mt-2">
+            <div className="col">
+              <input type="text" className="form-control" placeholder="Enter Name" value={name} onChange={(e) => { setname(e.target.value) }} />
             </div>
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Enter Location" aria-label="Enter Location" value={location} onChange={(e) => { setlocation(e.target.value) }} />
+            <div className="col">
+              <input type="text" className="form-control" value={email} disabled={true} />
             </div>
           </div>
-          <div class="row mt-4">
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Enter Comapany Unit" aria-label="Enter Comapany Unit" value={company} onChange={(e) => { setcompany(e.target.value) }} />
+          <div className="row mt-4">
+            <div className="col">
+              <input type="text" className="form-control" placeholder="Enter Phone" aria-label="Enter Phone" value={phone} onChange={(e) => { setphone(e.target.value) }} />
             </div>
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Enter Position" aria-label="Enter Position" value={position} onChange={(e) => { setposition(e.target.value) }} />
+            <div className="col">
+              <input type="text" className="form-control" placeholder="Enter Location" aria-label="Enter Location" value={location} onChange={(e) => { setlocation(e.target.value) }} />
+            </div>
+          </div>
+          <div className="row mt-4">
+            <div className="col">
+              <input type="text" className="form-control" placeholder="Enter Comapany Unit" aria-label="Enter Comapany Unit" value={company} onChange={(e) => { setcompany(e.target.value) }} />
+            </div>
+            <div className="col">
+              <input type="text" className="form-control" placeholder="Enter Position" aria-label="Enter Position" value={position} onChange={(e) => { setposition(e.target.value) }} />
             </div>
           </div>
         </div>
-        <button onClick={user==="" ? handleSubmit : handleUpdate} class="btn btn-danger mb-3 w-50 mx-auto">Submit</button>
+        <button onClick={user === "" ? handleSubmit : handleUpdate} className="btn btn-danger mb-3 w-50 mx-auto">Submit</button>
       </div>
     </>
   )

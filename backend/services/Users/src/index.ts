@@ -3,6 +3,8 @@ const app = express();
 import cors from "cors";
 import { createConnection } from "./database/db.config";
 import { UserController } from "./controllers/user.controller";
+import { uploadProfile } from "./middleware/uploadProfileImg";
+import path from "path"
 
 createConnection();
 app.use(cors({
@@ -15,7 +17,10 @@ app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept,Credentials');
     next();
   });
-  app.get("/list", async(req, res) => {
+
+app.use("/static/profile",express.static(path.join(process.cwd(),"src/images")))
+
+app.get("/list", async(req, res) => {
     try {
         const userController = new UserController();
         await userController.getAllUsers(req, res);
@@ -39,7 +44,7 @@ app.get("/getUser/:authId", async(req, res) => {
         console.log("User's Service : Global Error " + error);
     }
 })
-app.post("/create", async(req, res) => {
+app.post("/create",uploadProfile, async(req, res) => {
     try {
         const userController = new UserController();
         await userController.createUser(req, res);
@@ -47,7 +52,7 @@ app.post("/create", async(req, res) => {
         console.log("User's Service : Global Error " + error);
     }
 })
-app.put("/update/:id", async(req, res) => {
+app.put("/update/:id",uploadProfile, async(req, res) => {
     try {
         const userController = new UserController(); 
         await userController.updateUser(req, res);

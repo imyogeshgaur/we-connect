@@ -59,7 +59,7 @@ export class PostController {
             const token = req.body.token;
             const file = process.env.USER_POST_PREFIX as string + req.file?.filename;
             const user = await this.postHelper.decodeUsers(token);
-            const created_by = user.email
+            const created_by = user.auth.email
             const postToCreate = await this.postService.createPost(file,caption,hashtag,created_by);
             return res.status(200).send(postToCreate);
         } catch (error) {
@@ -67,7 +67,7 @@ export class PostController {
             return res.status(500).send("Post's Service : Internal Server Error !!!");
         }
     }
-
+    
     async updatePost(req: Request, res: Response) {
         try {
             const created_by = req.params.created_by;

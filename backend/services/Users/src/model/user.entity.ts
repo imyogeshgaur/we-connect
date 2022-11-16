@@ -6,6 +6,7 @@ const userSchema:Schema  = new mongoose.Schema({
     location:String,
     company:String,
     position:String,
+    image:String,
     authId:{
         type:Schema.Types.ObjectId,
         ref:"Auth",

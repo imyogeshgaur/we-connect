@@ -5,6 +5,9 @@ import Profile from "./Components/common/Profile"
 import AddPost from "./Components/common/AddPost"
 import Post from "./Components/common/Post"
 import ViewProfile from "./Components/common/ViewProfile"
+import ForgetPassword from "./Components/auth/ForgetPassword"
+import ResetPassword from "./Components/auth/ResetPassword"
+import NotFoundPage from "./Components/common/NotFoundPage"
 
 
 
@@ -17,6 +20,9 @@ function App() {
         <Route path="/addPost" element={<AddPost />} />
         <Route path="/post/:id" element={<Post />} />
         <Route path="/viewDetail/:id" element={<ViewProfile />} />
+        <Route path="/forgetPass" element={<ForgetPassword />}/>
+        <Route path="/resetPass" element={<ResetPassword />}/>
+        <Route path="*"  element={<NotFoundPage />}/>
       </Routes>
     </>
   )

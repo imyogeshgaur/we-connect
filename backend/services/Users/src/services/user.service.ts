@@ -23,7 +23,7 @@ export class UsersService{
     async updateUser(id:string,data:any){
         const user = await User.findOne({authId:id})
         if(user){
-          const result = await user.updateOne(data)
+          const result = await user.updateOne(data.data)
           return result;
         }
     }

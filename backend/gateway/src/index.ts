@@ -15,6 +15,10 @@ const server  =gateway({
         prefix:process.env.AUTH_URL as string,
         target:process.env.AUTH_URI as string
     },
+    {
+        prefix:process.env.MAIL_URL as string,
+        target:process.env.MAIL_URI as string
+    },
 ]
 })
 

@@ -62,7 +62,7 @@ app.put("/update/:created_by", async(req, res) => {
         console.log("Post's Service : Global Error " + error);
     }
 })
-app.delete("/delete/:created_by", async(req, res) => {
+app.delete("/delete/:postId", async(req, res) => {
     try {
         const postController = new PostController();
         await postController.deletePost(req, res);

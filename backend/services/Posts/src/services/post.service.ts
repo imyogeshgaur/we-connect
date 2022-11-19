@@ -1,4 +1,6 @@
 import Post from "../model/post.entity";
+import fs from "fs"
+import path from "path"
 
 export class PostsService{
     async getAllPosts(){
@@ -29,8 +31,16 @@ export class PostsService{
         }
     }
     
-    async deletePost(created_by:string){
-        const result =  await Post.deleteOne({created_by});
-        return result;
+    async deletePost(postId:string){
+        const postExist = await Post.findOne({_id:postId});
+        if(postExist){
+            const imageUrl = postExist.image;
+            const image = imageUrl.substr(40);
+            const imagePath = path.join(process.cwd(),`src/images/${image}`)
+            fs.unlinkSync(imagePath);
+            return await Post.deleteOne({_id:postId});
+        }else{
+            return 0;
+        }
     }
 }

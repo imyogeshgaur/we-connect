@@ -86,9 +86,9 @@ export class PostController {
 
     async deletePost(req: Request, res: Response) {
         try {
-            const created_by = req.params.created_by;
-            const deleteResult = await this.postService.deletePost(created_by);
-            if (deleteResult.deletedCount) {
+            const postId = req.params.postId;
+            const deleteResult = await this.postService.deletePost(postId);
+            if (deleteResult != 0) {
                 return res.status(200).send("Deleted Sucessfully !!!")
             } else {
                 return res.status(200).send("No Match Found !!!")

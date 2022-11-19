@@ -21,7 +21,7 @@ function App() {
         <Route path="/post/:id" element={<Post />} />
         <Route path="/viewDetail/:id" element={<ViewProfile />} />
         <Route path="/forgetPass" element={<ForgetPassword />}/>
-        <Route path="/resetPass" element={<ResetPassword />}/>
+        <Route path="/resetPass/:email" element={<ResetPassword />}/>
         <Route path="*"  element={<NotFoundPage />}/>
       </Routes>
     </>

@@ -96,7 +96,7 @@ const Auth = () => {
               </button>
             </div>
             <p className="text-center mt-2">
-              Forgot  <Link to="#" className={'link-primary'} style={{ textDecoration: "none" }}>password</Link>
+              Forgot  <Link to="/forgetPass" className={'link-primary'} style={{ textDecoration: "none" }}>password</Link>
             </p>
           </div>
         </div>

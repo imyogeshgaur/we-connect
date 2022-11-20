@@ -1,7 +1,8 @@
 import {useState,useEffect} from 'react'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 
 const PostBar = (props) => {
+    const navigate = useNavigate();
     const [data, setdata] = useState("")
     useEffect(() => {
         //Find Logged In User Details
@@ -10,6 +11,10 @@ const PostBar = (props) => {
         .then(data => setdata(data))
         .catch(err=>console.log(err))
      }, [])
+const logoutUser = ()=>{
+    document.cookie = "jwt=undefined;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+    navigate("/");
+}
     return (
         <>
             <nav className={"navbar navbar-light navbar-expand-lg bg-danger" }>
@@ -30,7 +35,7 @@ const PostBar = (props) => {
                         <i className={"icon-light fa-solid fa-user me-4 fa-2x dropdown-toggle"} data-bs-toggle="dropdown" aria-expanded="false" />
                         <ul className="dropdown-menu card-light" style={{ marginLeft: "-5rem", marginTop: "0.6rem" }}>
                             <Link to={`/viewDetail/${data._id}`} style={{textDecoration:"none"}}><li><button className="dropdown-item">View Profile</button></li></Link>
-                            <li><button className="dropdown-item">Log Out</button></li>
+                            <li><button className="dropdown-item" onClick={logoutUser}>Log Out</button></li>
                         </ul>
                     </div>
             </nav>

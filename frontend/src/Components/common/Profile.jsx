@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import PostBar from '../assets/PostBar'
 
 const Profile = () => {
-
+    const navigate = useNavigate();
     const [data, setdata] = useState("")
     const [posts, setposts] = useState([])
- 
+    const token = document.cookie.split('=')[1];
+
     useEffect(() => {
         //Find Logged In User Details
-        fetch("http://localhost:5000/auth/getLoginUser/" + document.cookie.split('=')[1])
-        .then(res=> res.json())
-        .then(data=> setdata(data))
+        if (token === undefined) {
+            navigate("/");
+        } else {
+            fetch("http://localhost:5000/auth/getLoginUser/" + token)
+                .then(res => res.json())
+                .then(data => setdata(data))
+                .catch(err => console.log(err))
+        }
 
         //Find Post By Creator 
         fetch("http://localhost:5000/posts/find/" + data.email)
             .then(res => res.json())
             .then(post => setposts(post))
             .catch(err => console.log(err))
-    }, [data.email])
+    }, [token,navigate,data.email])
 
     return (
         <>

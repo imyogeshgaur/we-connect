@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import PostViewBar from '../assets/PostViewBar'
 
 const ViewProfile = () => {
@@ -15,11 +15,19 @@ const ViewProfile = () => {
   const [image, setimage] = useState("")
   const [file, setfile] = useState("")
   const [user, setuser] = useState("")
+  const navigate = useNavigate();
+  const token = document.cookie.split('=')[1];
+
   useEffect(() => {
-    fetch("http://localhost:5000/auth/getLoginUser/" + document.cookie.split('=')[1])
-      .then(res => res.json())
-      .then(data => setdata(data))
-      .catch(err => console.log(err))
+     //Find Logged In User Details
+    if (token === undefined) {
+      navigate("/");
+    } else {
+      fetch("http://localhost:5000/auth/getLoginUser/" + token)
+        .then(res => res.json())
+        .then(data => setdata(data))
+        .catch(err => console.log(err))
+    }
 
     fetch("http://localhost:5000/auth/getUser/" + param.id)
       .then(res => res.json())
@@ -39,7 +47,7 @@ const ViewProfile = () => {
           document.getElementById("template2").classList.add("hide")
         }
       })
-  }, [param.id])
+  }, [token,navigate,param.id])
 
   const handleSubmit = async () => {
     try {

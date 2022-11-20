@@ -1,6 +1,11 @@
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 
 const PostViewBar = (props) => {
+    const navigate = useNavigate();
+    const logoutUser = ()=>{
+        document.cookie = "jwt=undefined;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+        navigate("/");
+    }
     return (
         <>
             <nav className={"navbar navbar-light navbar-expand-lg bg-danger"}>
@@ -18,7 +23,7 @@ const PostViewBar = (props) => {
                         <ul className="dropdown-menu card-light" style={{ marginLeft: "-5rem", marginTop: "0.6rem" }}>
                             <Link to="/profile" style={{textDecoration:"none"}}><li><button className="dropdown-item">View Posts</button></li></Link>
                             <Link to={props.secondOptionURL} style={{textDecoration:"none"}}><li><button className="dropdown-item">{props.secondOption}</button></li></Link>
-                            <li><button className="dropdown-item">Log Out</button></li>
+                            <li><button className="dropdown-item" onClick={logoutUser}>Log Out</button></li>
                         </ul>
                     </div>
                 </div>

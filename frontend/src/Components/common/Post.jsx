@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useParams,useNavigate } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import PostViewBar from '../assets/PostViewBar';
 
 const Post = () => {
@@ -7,20 +7,25 @@ const Post = () => {
     const navigate = useNavigate();
     const [data, setdata] = useState("")
     const [post, setpost] = useState([])
+    const token = document.cookie.split('=')[1];
 
     useEffect(() => {
         //Find Logged In User Details
-        fetch("http://localhost:5000/auth/getLoginUser/" + document.cookie.split('=')[1])
-            .then(res => res.json())
-            .then(data => setdata(data))
-            .catch(err => console.log(err))
+        if (token === undefined) {
+            navigate("/");
+        } else {
+            fetch("http://localhost:5000/auth/getLoginUser/" + token)
+                .then(res => res.json())
+                .then(data => setdata(data))
+                .catch(err => console.log(err))
+        }
 
         //Find Post By Creator 
         fetch("http://localhost:5000/posts/findById/" + param.id)
             .then(res => res.json())
             .then(post => setpost(post))
             .catch(err => console.log(err))
-    }, [param.id])
+    }, [token,navigate,param.id])
 
     const deletePost = async () => {
         try {

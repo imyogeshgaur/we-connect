@@ -47,12 +47,12 @@ export class AuthService {
             return 0
         }
     }
-    async getSingleUserFromId(id:string){
-        const user = await Auth.findOne({_id:id},{password:0,__v:0})
+    async getSingleUserFromId(id: string) {
+        const user = await Auth.findOne({ _id: id }, { password: 0, __v: 0 })
         return user;
     }
-    async decodetoken(token:any){
-        const decodedVal = jsonwebtoken.decode(token, {complete: true})
+    async decodetoken(token: any) {
+        const decodedVal = jsonwebtoken.decode(token, { complete: true })
         return decodedVal?.payload as string;
     }
 }

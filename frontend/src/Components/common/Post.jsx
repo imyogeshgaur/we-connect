@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
-import PostViewBar from '../assets/PostViewBar';
+import NavBar from '../assets/NavBar';
 
-const Post = () => {
+const Post = (props) => {
     const param = useParams();
     const navigate = useNavigate();
     const [data, setdata] = useState("")
@@ -45,7 +45,7 @@ const Post = () => {
 
     return (
         <>
-            <PostViewBar name={`@${data.userName}`} />
+            <NavBar name={`@${data.userName}`} />
             <div className="mt-3" style={{ display: "flex", justifyContent: "center" }}>
                 <div className='card card-light col col-md-4 col-lg-4 col-sm-4 col-xs-12'>
                     <img src={post.image} class="card-img-top" alt="data" height="235px" />

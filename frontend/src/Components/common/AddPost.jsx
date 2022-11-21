@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import PostViewBar from '../assets/PostViewBar'
+import NavBar from '../assets/NavBar'
 
-const AddPost = () => {
+const AddPost = (props) => {
     const [data, setdata] = useState("")
     const [caption, setcaption] = useState("")
     const [hashtag, sethashtag] = useState("")
@@ -41,7 +41,7 @@ const AddPost = () => {
     }
     return (
         <>
-            <PostViewBar secondOption={"View Profile"} secondOptionURL={`/viewDetail/${data._id}`} name={`@${data.userName}`} />
+            <NavBar name={`@${data.userName}`}  secondOption={"View Profile"} secondOptionURL={`/viewDetail/${data._id}`}/>
             <div className={"card mx-auto mt-4"} style={{ width: "38rem" }}>
                 <div className={"imageUpload-light"}>
                     <input type="file" name="" id="postImgInput" onChange={(e) => setfile(e.target.files[0])} />

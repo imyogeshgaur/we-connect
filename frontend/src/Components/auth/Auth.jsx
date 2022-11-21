@@ -58,7 +58,7 @@ const Auth = () => {
   if (authMode === "signin") {
     return (
       <>
-        <NavBar />
+        <NavBar detail={"hidden"}/>
         <div className={"Auth-form card-light mx-auto mt-5"}>
           <div className="Auth-form-content">
             <h3 className={"card-title text-center mb-2 text-dark"}>Sign In</h3>
@@ -104,7 +104,7 @@ const Auth = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar detail={"hidden"}/>
       <div className={"Auth-form card-light mx-auto mt-5"}>
         <div className="Auth-form-content">
           <h3 className={"card-title text-center mb-2 text-dark"}>Sign In</h3>

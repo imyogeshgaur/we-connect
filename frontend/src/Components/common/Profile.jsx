@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import PostBar from '../assets/PostBar'
+import NavBar from '../assets/NavBar';
 
-const Profile = () => {
+
+const Profile = (props) => {
     const navigate = useNavigate();
     const [data, setdata] = useState("")
     const [posts, setposts] = useState([])
@@ -28,7 +29,7 @@ const Profile = () => {
 
     return (
         <>
-            <PostBar name={`@${data.userName}`}/>
+            <NavBar name={`@${data.userName}`}  secondOption={"View Profile"} secondOptionURL={`/viewDetail/${data._id}`}/>
             <h1 className="text-center">{posts.length === 0 ? "No Post To Display" : " "}</h1>
             <div className="row mt-4">
                 {

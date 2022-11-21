@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const NotFoundPage = () => {
+const NotFoundPage = (props) => {
     return (
         <>
             <section class="page_404">

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import PostViewBar from '../assets/PostViewBar'
+import NavBar from '../assets/NavBar'
 
-const ViewProfile = () => {
+const ViewProfile = (props) => {
   const [data, setdata] = useState("")
   const [userName, setuserName] = useState("")
   const param = useParams();
@@ -94,7 +94,7 @@ const ViewProfile = () => {
 
   return (
     <>
-      <PostViewBar name={`@${data.userName}`} secondOption={"Add Post"} secondOptionURL={"/addPost"} />
+      <NavBar name={`@${data.userName}`} secondOption={"View Post"} secondOptionURL={"/profile"} />
       <div className="card mx-auto mt-4" style={{ width: "48rem" }}>
         <div className="card-body">
           <div className="wrapper mt-3" id='template1'>

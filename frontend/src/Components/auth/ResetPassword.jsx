@@ -34,7 +34,7 @@ const ResetPassword = () => {
   }
   return (
     <>
-      <NavBar />
+      <NavBar detail={"hidden"}/>
       <div className={"Auth-form card-light mx-auto mt-5"}>
         <div className="Auth-form-content">
           <div className="text-center">

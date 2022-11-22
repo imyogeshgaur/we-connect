@@ -8,6 +8,8 @@ import ViewProfile from "./Components/common/ViewProfile"
 import ForgetPassword from "./Components/auth/ForgetPassword"
 import ResetPassword from "./Components/auth/ResetPassword"
 import NotFoundPage from "./Components/common/NotFoundPage"
+import Friends from "./Components/common/Friends"
+import FriendRequest from "./Components/common/FriendRequest"
 
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
         <Route path="/viewDetail/:id" element={<ViewProfile  />} />
         <Route path="/forgetPass" element={<ForgetPassword  />} />
         <Route path="/resetPass/:email" element={<ResetPassword  />} />
+        <Route path="/friend" element={<Friends />} />
+        <Route path="/friendRequest" element={<FriendRequest />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>

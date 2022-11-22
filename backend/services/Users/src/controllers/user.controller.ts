@@ -1,15 +1,29 @@
 import { Request, Response } from "express";
 import { UsersService } from "../services/user.service";
-
+import axios from "axios";
 
 export class UserController {
     protected userService = new UsersService();
 
+    async getAllAuthUsers(){
+        try {
+            const response = await axios.get(process.env.GET_AUTH_URI as string)
+            const data = await response.data;
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
     async getAllUsers(req: Request, res: Response) {
         try {
             const users = await this.userService.getAllUsers();
+            const authUsers = await this.getAllAuthUsers();
+            const finalArray = Array();
             if (users.length != 0) {
-                return res.status(200).send(users);
+                for (let i = 0; i < users.length; i++) {
+                    finalArray.push({user:users[i],auth:authUsers[i]})
+                }
+                return res.status(200).send(finalArray);
             } else {
                 return res.status(200).send("No User Found !!!")
             }
@@ -82,6 +96,19 @@ export class UserController {
         } catch (error) {
             console.log(error);
             return res.status(500).send("User's Service : Internal Server Error !!!");
+        }
+    }
+
+    //Friend Entity Controller 
+    async requestToFriend(req: Request, res: Response){
+        try {
+            const senderId = req.params.id;
+            const reciverId = req.body.reciverId;
+            const result = await this.userService.requestToFriend(senderId,reciverId);
+            return res.status(200).send(result)
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Internal Server Error !!!")
         }
     }
 }

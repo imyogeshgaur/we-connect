@@ -6,6 +6,10 @@ import * as path from "path"
 dotenv.config({ path: path.resolve("./src/env/auth.env") });
 
 export class AuthService {
+    async listUsers(){
+        const users = await Auth.find({},{password:0,__v:0});
+        return users;
+    }
     async signup(body: any) {
         const { userName, email, password } = body;
         const newPass = await bcrypt.hash(password, 12);

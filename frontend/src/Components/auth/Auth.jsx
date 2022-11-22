@@ -107,11 +107,11 @@ const Auth = () => {
       <NavBar detail={"hidden"}/>
       <div className={"Auth-form card-light mx-auto mt-5"}>
         <div className="Auth-form-content">
-          <h3 className={"card-title text-center mb-2 text-dark"}>Sign In</h3>
+          <h3 className={"card-title text-center mb-2 text-dark"}>Sign Up</h3>
           <div className="text-center">
-            Not registered yet?
+            Already registered ?
             <span className={"link-primary ms-2"} onClick={changeAuthMode}>
-              Sign Up
+              Sign In
             </span>
           </div>
           <div className="form-group mt-3">

@@ -6,16 +6,20 @@ export class AuthController {
     protected authService = new AuthService();
     async getOtherDetails(authId:string){
         try {
-            try {
-                const response = await axios.get(process.env.GET_USER_URI as string + authId)
-                const data = await response.data;
-                return data;
-            } catch (error) {
-                console.log(error);
-            }
+            const response = await axios.get(process.env.GET_USER_URI as string + authId)
+            const data = await response.data;
+            return data;
         } catch (error) {
             console.log(error);
-            
+        }
+    }
+    async listUsers(req:Request,res:Response){
+        try {
+            const users = await this.authService.listUsers();
+            return res.status(200).send(users);
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Internal Server Error !!!");
         }
     }
     async signup(req: Request, res: Response) {

@@ -69,4 +69,14 @@ app.delete("/delete/:email", async(req, res) => {
     }
 })
 
+//FriendSchema
+app.post("/request/:id",async (req,res)=>{
+    try {
+        const userController = new UserController();
+        await userController.requestToFriend(req, res);
+    } catch (error) {
+        console.log("User's Service : Global Error " + error);
+    }
+})
+
 app.listen(5001,()=>console.log("User Service is Running !!!!"))

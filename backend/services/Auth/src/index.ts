@@ -18,6 +18,15 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.get("/list",async(req,res)=>{
+    try {
+        const authController = new AuthController();
+        await authController.listUsers(req,res);
+    } catch (error) {
+        console.log("Authentication Service : Global Error " + error);
+    }
+})
+
 app.post("/signup", async (req, res) => {
     try {
         const authController = new AuthController();

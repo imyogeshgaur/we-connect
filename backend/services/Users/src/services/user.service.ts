@@ -1,12 +1,13 @@
+import friendRequest from "../model/request.entity";
 import User from "../model/user.entity";
 
 export class UsersService{
     async getAllUsers(){
-        const users = await User.find().limit(5);
+        const users = await User.find({},{_id:0,authId:0,__v:0});
         return users;
     }
     async getSingleUser(email:string){
-        const user = await User.findOne({email});
+        const user = await User.findOne({email},{_id:0,authId:0,__v:0});
         return user;
     }
     async getSingleUserFromId(id:string){
@@ -28,7 +29,14 @@ export class UsersService{
         }
     }
     async deleteUser(email:string){
-        const result =  await User.deleteOne({email});
+        const result =  await User.deleteOne({email},{_id:0,authId:0,__v:0});
+        return result;
+    }
+
+    //Friend Database Service 
+    async requestToFriend(senderId:string,reciverId:string){
+        const friendData = await friendRequest.create({senderId,reciverId})
+        const result = await friendData.save();
         return result;
     }
 }

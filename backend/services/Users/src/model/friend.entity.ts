@@ -1,10 +1,13 @@
 import { model, Schema } from "mongoose";
 
 const friendSchema =  new Schema({
-    requesterId: String,
+    requesterId: {
+        type:Schema.Types.ObjectId,
+        ref:"Auth"
+    },
     approverId:{
         type:Schema.Types.ObjectId,
-        ref:"User"
+        ref:"Auth"
     }
 })
 

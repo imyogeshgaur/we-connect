@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import NavBar from '../assets/NavBar';
+import PostCard from '../assets/PostCard';
 
 
 const Profile = (props) => {
@@ -36,13 +37,7 @@ const Profile = (props) => {
                     posts.map((val) => {
                         return (
                             <>
-                                <div className="col col-md-4 col-lg-4 col-sm-4 col-xs-12" key={val._id}>
-                                    <div className={"card card-light mt-4"} key={val._id}>
-                                        <Link to={`/post/${val._id}`} key={val._id}>
-                                            <img src={val.image} alt="data" className='card-img-top' height="235px" />
-                                        </Link>
-                                    </div>
-                                </div>
+                               <PostCard id={val._id} image={val.image}/>
                             </>
                         )
                     })

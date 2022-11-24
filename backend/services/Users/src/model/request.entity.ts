@@ -1,10 +1,13 @@
 import { model, Schema } from "mongoose";
 
 const requestSchema =  new Schema({
-    senderId:String,
+    senderId:{
+        type:Schema.Types.ObjectId,
+        ref:"Auth"
+    },
     reciverId:{
         type:Schema.Types.ObjectId,
-        ref:"User"
+        ref:"Auth"
     }
 })
 

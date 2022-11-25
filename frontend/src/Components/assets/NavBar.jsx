@@ -44,7 +44,7 @@ const NavBar = (props) => {
           <i className={"icon-light fa-solid fa-user me-4 fa-2x dropdown-toggle"} data-bs-toggle="dropdown" aria-expanded="false" />
           <ul className="dropdown-menu card-light" style={{ marginLeft: "-5rem", marginTop: "0.6rem" }}>
             <Link to={props.secondOptionURL} style={{ textDecoration: "none" }}><li><button className="dropdown-item">{props.secondOption}</button></li></Link>
-            <Link to="/friend" style={{ textDecoration: "none" }}><li><button className="dropdown-item">See Friends</button></li></Link>
+            <Link to="/friendList" style={{ textDecoration: "none" }}><li><button className="dropdown-item">See Friends</button></li></Link>
             <Link to="/friendRequest" style={{ textDecoration: "none" }}><li><button className="dropdown-item">See Requests</button></li></Link>
             <li><button className="dropdown-item" onClick={logoutUser}>Log Out</button></li>
           </ul>

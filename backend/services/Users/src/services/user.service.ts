@@ -39,4 +39,13 @@ export class UsersService{
         const result = await friendData.save();
         return result;
     }
+    async seeFriendRequest(senderId:string){
+       const friendRequests = await friendRequest.find({senderId})
+       const reciverIdArr = Array();
+       for (let i = 0; i < friendRequests.length; i++) {
+            reciverIdArr.push(friendRequests[i].reciverId)
+       }
+       return reciverIdArr;
+       
+    }
 }

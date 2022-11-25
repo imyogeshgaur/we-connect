@@ -78,5 +78,21 @@ app.post("/request/:id",async (req,res)=>{
         console.log("User's Service : Global Error " + error);
     }
 })
+app.get("/request/:id",async(req,res)=>{
+    try {
+        const userController = new UserController();
+        await userController.seeFriendRequest(req, res);
+    } catch (error) {
+        console.log("User's Service : Global Error " + error);
+    }
+})
+app.get("/request/:id",async(req,res)=>{
+    try {
+        const userController = new UserController();
+        await userController.seeFriendRequest(req, res);
+    } catch (error) {
+        console.log("User's Service : Global Error " + error);
+    }
+})
 
 app.listen(5001,()=>console.log("User Service is Running !!!!"))

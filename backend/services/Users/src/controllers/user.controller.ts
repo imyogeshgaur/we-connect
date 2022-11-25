@@ -14,6 +14,15 @@ export class UserController {
             console.log(error);
         }
     }
+    async getSingleAuthUser(id:string){
+        try {
+            const response = await axios.get(process.env.GET_SINGLE_AUTH_URI as string + id)
+            const data = await response.data;
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
     async getAllUsers(req: Request, res: Response) {
         try {
             const users = await this.userService.getAllUsers();
@@ -106,6 +115,21 @@ export class UserController {
             const reciverId = req.body.reciverId;
             const result = await this.userService.requestToFriend(senderId,reciverId);
             return res.status(200).send(result)
+        } catch (error) {
+            console.log(error);
+            return res.status(500).send("Internal Server Error !!!")
+        }
+    }
+    async seeFriendRequest(req: Request, res: Response){
+        try {
+            const senderId = req.params.id;
+            const result = await this.userService.seeFriendRequest(senderId);
+            const friendToRequested = Array();
+            for (let i = 0; i < result.length; i++) {
+                const data = await this.getSingleAuthUser(result[i])
+                friendToRequested.push(data)
+            }
+            return res.status(200).send(friendToRequested);
         } catch (error) {
             console.log(error);
             return res.status(500).send("Internal Server Error !!!")

@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import NavBar from '../assets/NavBar'
-import RequestCard from '../assets/RequestCard'
+import NavBar from "../assets/NavBar"
+import ProfileCard from '../assets/ProfileCard';
 
-const FriendRequest = () => {
+const FriendList = () => {
+  const navigate = useNavigate();
+  const token = document.cookie.split('=')[1];
   const [data, setdata] = useState("")
   const [user, setuser] = useState([])
-  const [selected, setSelected] = useState(null)
-  const token = document.cookie.split('=')[1];
-  const navigate = useNavigate();
+  const [selected, setSelected] = useState(null);
 
   useEffect(() => {
     if (token === undefined) {
@@ -19,39 +19,38 @@ const FriendRequest = () => {
         .then(data => setdata(data))
         .catch(err => console.log(err))
     }
-    fetch("http://localhost:5000/users/request/" + data._id)
+    fetch("http://localhost:5000/users/list")
       .then(res => res.json())
       .then(data => {
         setuser(data)
-        console.log(data[1].user.image);
+        console.log(data[2].user.image)
       })
-  }, [navigate, token, data._id])
-  if (user.length === 0) {
+  }, [navigate, token])
+  const filteredVal = user.filter(val => val.auth.userName !== data.userName)
+  if (filteredVal === 0) {
     return (
       <>
         <NavBar name={`@${data.userName}`} secondOption={"View Profile"} secondOptionURL={`/viewDetail/${data._id}`} />
-        <h1 className='text-center'>No Pending Request!!!</h1>
+        <h1 className="text-center">No User Available !!!</h1>
       </>
     )
   }
   return (
     <>
       <NavBar name={`@${data.userName}`} secondOption={"View Profile"} secondOptionURL={`/viewDetail/${data._id}`} />
-
       <div className="row mt-4">
         {
-          user.map((val) => {
+          filteredVal.map((val) => {
             return (
               <>
-                <RequestCard id={val.auth._id} userName={val.auth.userName} image={val.user.image} selected={selected} setSelected={setSelected} />
+                <ProfileCard id={val.auth._id} userName={val.auth.userName} image={val.user.image} selected={selected} setSelected={setSelected} btnName={"Add Friend"} />
               </>
             )
           })
         }
       </div>
-
     </>
   )
 }
 
-export default FriendRequest
+export default FriendList

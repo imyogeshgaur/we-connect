@@ -11,6 +11,7 @@ import NotFoundPage from "./Components/common/NotFoundPage"
 import FriendRequest from "./Components/common/FriendRequest"
 import FriendList from "./Components/common/FriendList"
 import Friends from "./Components/common/Friends"
+import ChatWithFriend from "./Components/chat/ChatWithFriend"
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/friendList" element={<FriendList />} />
         <Route path="/friendRequest" element={<FriendRequest />} />
         <Route path="/friends" element={<Friends />} />
+        <Route path="/chat/:name" element={<ChatWithFriend />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>

@@ -40,6 +40,9 @@ const NavBar = (props) => {
             <i className={"icon-light fa-solid fa-square-plus me-4 fa-2x"}></i>
           </Link>
         </div>
+        <Link to={`/chat/${props.name}`} style={{display:props.showChat}}>
+        <i className={"icon-light fa-sharp fa-solid fa-comment me-4 fa-2x"}></i>
+        </Link>
         <div className="dropdown">
           <i className={"icon-light fa-solid fa-user me-4 fa-2x dropdown-toggle"} data-bs-toggle="dropdown" aria-expanded="false" />
           <ul className="dropdown-menu card-light" style={{ marginLeft: "-5rem", marginTop: "0.6rem" }}>

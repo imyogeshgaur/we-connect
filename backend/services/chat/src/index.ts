@@ -19,7 +19,7 @@ app.get("/allChat", async (req, res) => {
         console.log("Chat's Service : Global Error " + error);
     }
 })
-app.get("/:roomId", async (req, res) => {
+app.get("/rooms/:roomId", async (req, res) => {
     try {
         const chatController = new ChatController();
         await chatController.getAllChatOfRoom(req, res);
@@ -27,7 +27,7 @@ app.get("/:roomId", async (req, res) => {
         console.log("Chat's Service : Global Error " + error);
     }
 })
-app.get("/:recieverId", async (req, res) => {
+app.get("/users/:recieverId", async (req, res) => {
     try {
         const chatController = new ChatController();
         await chatController.getChatsOfAUser(req, res);

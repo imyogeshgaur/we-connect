@@ -1,8 +1,8 @@
 import express from "express";
 const app = express();
 import cors from "cors";
-import { createConnection } from "./database/db.config";
-import { UserController } from "./controllers/user.controller";
+import createConnection  from "./database/db.config";
+import  UserController  from "./controllers/user.controller";
 import { uploadProfile } from "./middleware/uploadProfileImg";
 import path from "path"
 

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { UsersService } from "../services/user.service";
+import UsersService  from "../services/user.service";
 import axios from "axios";
 
-export class UserController {
+export default class UserController {
     protected userService = new UsersService();
 
     async getAllAuthUsers(){

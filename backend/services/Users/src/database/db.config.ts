@@ -3,11 +3,13 @@ import dotenv from "dotenv";
 import * as path from "path"
 dotenv.config({path:path.resolve("./src/env/user.env")});
 
-export const createConnection = async()=>{
+const createConnection = async()=>{
     try {
         await mongoose.connect(process.env.DBURI as string);
-        console.log("User Service : Connected Sucessfully !!!");
+        console.log("User Service Database : Connected Sucessfully !!!");
     } catch (error) {
         console.log(error);
     }
 }
+
+export default createConnection;

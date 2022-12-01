@@ -1,7 +1,7 @@
 import express from "express";
 const app = express();
 import cors from "cors";
-import { MailController } from "./controllers/mail.controller";
+import  MailController  from "./controllers/mail.controller";
 
 
 app.use(cors({

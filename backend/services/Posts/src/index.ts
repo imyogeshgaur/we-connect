@@ -1,8 +1,8 @@
 import express from "express";
 const app = express();
 import cors from "cors";
-import { createConnection } from "./database/db.config";
-import { PostController } from "./controllers/post.controller";
+import  createConnection  from "./database/db.config";
+import  PostController  from "./controllers/post.controller";
 import { uploadPost } from "./middleware/uploadImage";
 import path from "path";
 

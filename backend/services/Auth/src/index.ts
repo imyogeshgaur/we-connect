@@ -1,8 +1,8 @@
 import express from "express";
-import { createConnection } from "./database/db.config"
+import createConnection  from "./database/db.config"
 const app = express();
 import cors from "cors";
-import { AuthController } from "./controllers/auth.controller";
+import  AuthController  from "./controllers/auth.controller";
 
 createConnection();
 app.use(cors({

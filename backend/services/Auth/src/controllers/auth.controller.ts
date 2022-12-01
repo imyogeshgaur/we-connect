@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { AuthService } from "../services/auth.service";
+import AuthService  from "../services/auth.service";
 import axios from "axios";
 
-export class AuthController {
+export default class AuthController {
     protected authService = new AuthService();
     async getOtherDetails(authId:string){
         try {

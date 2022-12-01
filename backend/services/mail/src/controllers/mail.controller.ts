@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { MailService } from "../services/mail.service";
+import  MailService  from "../services/mail.service";
 
-export class MailController {
+export default class MailController {
     protected mailService = new MailService();
     async createMail(req:Request,res:Response){
         try {

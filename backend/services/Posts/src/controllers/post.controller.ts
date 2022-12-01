@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { PostsService } from "../services/post.service";
+import  PostsService  from "../services/post.service";
 import { Posthelpers } from "../helpers/post.helpers";
 import dotenv from "dotenv";
 import * as path from "path"
 dotenv.config({path:path.resolve("./src/env/post.env")});
 
-export class PostController {
+export default class PostController {
     protected postService = new PostsService();
     protected postHelper = new Posthelpers();
 

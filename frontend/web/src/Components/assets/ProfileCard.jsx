@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
-const RequestCard = (props) => {
+const ProfileCard = (props) => {
     const [data, setdata] = useState("")
     const navigate = useNavigate();
     const token = document.cookie.split('=')[1];
@@ -34,16 +34,11 @@ const RequestCard = (props) => {
                 <div className={"card card-light mt-4"} key={props.id}>
                     <img src={props.image} alt="data" className='card-img-top' height="235px" />
                     <h1 className='text-center'>@{props.userName}</h1>
-                    <div className="row text-center">
-                        <div className="col">
-                            <button className="btn btn-primary" onClick={(e) => props.setSelected(props.id)}>Confirm</button>
-                            <button className="btn btn-danger ms-3" onClick={(e) => props.setSelected(props.id)}>Remove</button>
-                        </div>
-                    </div>
+                    <button className="btn btn-danger w-50 mx-auto" onClick={(e) => props.setSelected(props.id)} id="addFriend">{props.btnName}</button>
                 </div>
             </div>
         </>
     )
 }
 
-export default RequestCard
+export default ProfileCard

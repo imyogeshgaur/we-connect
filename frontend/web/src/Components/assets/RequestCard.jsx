@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
-const ProfileCard = (props) => {
+const RequestCard = (props) => {
     const [data, setdata] = useState("")
     const navigate = useNavigate();
     const token = document.cookie.split('=')[1];
@@ -18,13 +18,13 @@ const ProfileCard = (props) => {
         }
     }, [navigate, token])
     if (props.selected === reciverId) {
-        fetch(`http://localhost:5000/users/request/${senderId}`, {
+        fetch(`http://localhost:5000/users/setFriend/${senderId}`, {
             mode: 'cors',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ reciverId })
+            body: JSON.stringify({ approverId : reciverId })
         })
         alert("Request Send Sucessfully !!!")
     }
@@ -34,11 +34,16 @@ const ProfileCard = (props) => {
                 <div className={"card card-light mt-4"} key={props.id}>
                     <img src={props.image} alt="data" className='card-img-top' height="235px" />
                     <h1 className='text-center'>@{props.userName}</h1>
-                    <button className="btn btn-danger w-50 mx-auto" onClick={(e) => props.setSelected(props.id)}>{props.btnName}</button>
+                    <div className="row text-center">
+                        <div className="col">
+                            <button className="btn btn-primary" onClick={(e) => props.setSelected(props.id)}>Confirm</button>
+                            <button className="btn btn-danger ms-3" onClick={(e) => props.setSelected(props.id)}>Remove</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
     )
 }
 
-export default ProfileCard
+export default RequestCard

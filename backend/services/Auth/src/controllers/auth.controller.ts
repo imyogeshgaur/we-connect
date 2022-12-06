@@ -92,7 +92,7 @@ export default class AuthController {
        try {
             const token = req.params.token;
             const decodedVal = await this.authService.decodetoken(token);
-            const data = await this.authService.getSingleUserFromId(decodedVal);
+            const data = await this.authService.getSingleUserFromId(decodedVal as string);
             return res.status(200).send(data);
        } catch (error) {
             console.log(error);

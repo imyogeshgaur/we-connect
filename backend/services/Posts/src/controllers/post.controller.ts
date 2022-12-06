@@ -11,7 +11,7 @@ export default class PostController {
 
     async getAllPosts(req: Request, res: Response) {
         try {
-            const users = await this.postService.getAllPosts();
+            const users:any = await this.postService.getAllPosts();
             if (users.length != 0) {
                 return res.status(200).send(users);
             } else {
@@ -26,7 +26,7 @@ export default class PostController {
     async getPosts(req: Request, res: Response) {
         try {
             const created_by = req.params.created_by; 
-            const posts = await this.postService.getPosts(created_by);
+            const posts:any = await this.postService.getPosts(created_by);
             if (posts.length!=0) {
                 return res.status(200).send(posts)
             } else {

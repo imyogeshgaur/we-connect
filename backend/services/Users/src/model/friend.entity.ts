@@ -11,5 +11,5 @@ const friendSchema =  new Schema({
     }
 })
 
-const friend = model("friend",friendSchema)
-export default friend;
+const Friend = model("Friend",friendSchema)
+export default Friend;

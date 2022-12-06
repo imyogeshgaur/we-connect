@@ -69,7 +69,8 @@ app.delete("/delete/:email", async(req, res) => {
     }
 })
 
-//FriendSchema
+//! FriendSchema
+//? Request API
 app.post("/request/:id",async (req,res)=>{
     try {
         const userController = new UserController();
@@ -86,13 +87,22 @@ app.get("/request/:id",async(req,res)=>{
         console.log("User's Service : Global Error " + error);
     }
 })
-app.get("/request/:id",async(req,res)=>{
+
+//? Friend API
+app.post("/setFriend/:requesterId",async (req,res)=>{
     try {
         const userController = new UserController();
-        await userController.seeFriendRequest(req, res);
+        await userController.setFriend(req, res);
     } catch (error) {
         console.log("User's Service : Global Error " + error);
     }
 })
-
+app.get("/getFriend/:id",async(req,res)=>{
+    try {
+        const userController = new UserController();
+        await userController.getFriend(req, res);
+    } catch (error) {
+        console.log("User's Service : Global Error " + error);
+    }
+})
 app.listen(5001,()=>console.log("User Service is Running !!!!"))

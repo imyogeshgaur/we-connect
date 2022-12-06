@@ -1,5 +1,6 @@
 import friendRequest from "../model/request.entity";
 import User from "../model/user.entity";
+import Friend from "../model/friend.entity";
 
 export default class UsersService {
     async getAllUsers() {
@@ -57,7 +58,9 @@ export default class UsersService {
         }
     }
 
-    //Friend Database Service 
+    //! Friend Database Service
+
+    //? Friend Request Service 
     async requestToFriend(senderId: string, reciverId: string) {
         try {
             const friendData = await friendRequest.create({ senderId, reciverId })
@@ -78,6 +81,21 @@ export default class UsersService {
         } catch (error) {
             console.log(error);
         }
+
+    }
+
+    //? Friend Service
+    async setFriend(requesterId:string,approverId:string){
+        try {
+            const friendData = await Friend.create({ requesterId ,approverId})
+            const result = await friendData.save();
+            console.log(result)
+            return result;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    async getFriend(requesterId:string){
 
     }
 }

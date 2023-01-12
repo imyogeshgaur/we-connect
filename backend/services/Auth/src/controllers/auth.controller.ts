@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import AuthService  from "../services/auth.service";
 import axios from "axios";
+import {signInUserController} from "../helpers/signinUser";
 
 export default class AuthController {
     protected authService = new AuthService();
@@ -26,7 +27,11 @@ export default class AuthController {
         try {
             const body = req.body;
             const userToSave = await this.authService.signup(body);
-            return res.status(201).send(userToSave);
+            if(userToSave===0){
+                return res.status(201).send("User Already Exist !!!");
+            }else{
+                return res.status(201).send(userToSave);
+            }
         } catch (error) {
             console.log(error);
             return res.status(500).send("Auth's Service : Internal Service Errror !!!")
@@ -34,15 +39,17 @@ export default class AuthController {
     }
     async login(req: Request, res: Response) {
         try {
-            const body = req.body;
-            const tokenToGet = await this.authService.login(body);
-            if (tokenToGet === 0) {
-                return res.status(200).send("No User Found !!!");
-            } else if (tokenToGet === 1) {
-                return res.status(200).send("Invalid Credentials !!!")
+            const email = req.body.email
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+                const value = await this.authService.loginUserByEmail(req.body);
+                const data = signInUserController(res, value);
+                return data;
             } else {
-                return res.status(200).send({ token: tokenToGet });
+                const value = await this.authService.loginUserByUserName(req.body);
+                const data = signInUserController(res, value);
+                return data;
             }
+           
         } catch (error) {
             console.log(error);
             return res.status(500).send("Auth's Service : Internal Service Errror !!!")

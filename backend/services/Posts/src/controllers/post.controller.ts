@@ -56,9 +56,9 @@ export default class PostController {
         try {
             const caption = req.body.caption;
             const hashtag = req.body.hashtag;
-            const token = req.body.token;
+            const token = req.headers.authorization;
             const file = process.env.USER_POST_PREFIX as string + req.file?.filename;
-            const user = await this.postHelper.decodeUsers(token);
+            const user = await this.postHelper.decodeUsers(token as string);
             const created_by = user.auth.email
             const postToCreate = await this.postService.createPost(file,caption,hashtag,created_by);
             return res.status(200).send(postToCreate);

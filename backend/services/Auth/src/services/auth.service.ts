@@ -1,9 +1,8 @@
 import Auth from "../model/auth.entity";
 import bcrypt from "bcrypt";
-import jsonwebtoken from "jsonwebtoken";
-import dotenv from "dotenv";
-import * as path from "path"
-dotenv.config({ path: path.resolve("./src/env/auth.env") });
+import { signInUserService } from "../helpers/signinUser";
+import decodeUser from "../helpers/decodeUser";
+
 
 export default class AuthService {
     async listUsers() {
@@ -17,29 +16,56 @@ export default class AuthService {
     async signup(body: any) {
         try {
             const { userName, email, password } = body;
-            const newPass = await bcrypt.hash(password, 12);
-            const userToSave = new Auth({ userName, email, password: newPass });
-            const newUser = await userToSave.save();
-            return newUser
+            const userByUserName = await Auth.findOne({ userName });
+            const userByEmail = await Auth.findOne({ email });
+            if (userByEmail || userByUserName) {
+                return 0;
+            } else {
+                const newPass = await bcrypt.hash(password, 12);
+                const userToSave = new Auth({ userName, email, password: newPass });
+                const newUser = await userToSave.save();
+                return newUser  
+            }
+
         } catch (error) {
             console.log(error)
         }
     }
 
-    async login(body: any) {
+    async loginUserByEmail(body: any) {
         try {
             const { email, password } = body;
             const user = await Auth.findOne({ email });
-            if (user) {
-                const match = await bcrypt.compare(password, user.password);
-                if (match) {
-                    const token = jsonwebtoken.sign(user.id, process.env.SECRET as string);
-                    return token
+            if (user !== null) {
+                if (email.toLowerCase() == user.email.toLowerCase()) {
+                    const value = await signInUserService(user, password);
+                    return value;
                 } else {
-                    return 1
+                    return 0;
                 }
             } else {
                 return 0
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async loginUserByUserName(body: any) {
+        try {
+            const { email, password } = body;
+            const user = await Auth.findOne({ userName:email });
+            if (user) {
+                if (user !== null) {
+                    if (email.toLowerCase() == user.userName.toLowerCase()) {
+                        const value = await signInUserService(user, password);
+                        return value;
+                    } else {
+                        return 0;
+                    }
+                } else {
+                    return 0
+                }
             }
         } catch (error) {
             console.log(error)
@@ -81,8 +107,8 @@ export default class AuthService {
     }
     async decodetoken(token: any) {
         try {
-            const decodedVal = jsonwebtoken.decode(token, { complete: true })
-            return decodedVal?.payload as string;
+            const decodedVal = decodeUser(token)
+            return decodedVal;
         } catch (error) {
             console.log(error)
         }

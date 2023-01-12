@@ -69,11 +69,11 @@ const Auth = () => {
               </span>
             </div>
             <div className="form-group mt-3">
-              <label className={"text-dark"}>Email address</label>
+              <label className={"text-dark"}>Email or UserName</label>
               <input
                 type="email"
                 className="form-control mt-1"
-                placeholder="Enter email"
+                placeholder="Enter Email or UserName"
                 value={email}
                 onChange={(e) => setemail(e.target.value)}
               />

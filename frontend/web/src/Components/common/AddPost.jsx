@@ -27,10 +27,12 @@ const AddPost = (props) => {
             formData.append("post", file)
             formData.append("caption", caption)
             formData.append("hashtag", hashtag)
-            formData.append("token", token)
             await fetch("http://localhost:5000/posts/createPost", {
                 method: 'POST',
                 mode: "cors",
+                headers:{
+                    'authorization':token
+                },
                 body: formData
             })
             alert("Uploaded !!!")

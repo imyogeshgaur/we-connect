@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import AuthService  from "../services/auth.service";
 import axios from "axios";
 import {signInUserController} from "../helpers/signinUser";
+import dotenv from "dotenv";
+import * as path from "path"
+dotenv.config({ path: path.resolve("./src/env/auth.env") });
 
 export default class AuthController {
     protected authService = new AuthService();

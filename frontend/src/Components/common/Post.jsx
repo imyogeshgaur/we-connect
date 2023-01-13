@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import NavBar from '../assets/NavBar';
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const Post = (props) => {
     const param = useParams();
@@ -25,7 +27,7 @@ const Post = (props) => {
             .then(res => res.json())
             .then(post => setpost(post))
             .catch(err => console.log(err))
-    }, [token,navigate,param.id])
+    }, [token, navigate, param.id])
 
     const deletePost = async () => {
         try {
@@ -36,8 +38,20 @@ const Post = (props) => {
                     'Content-Type': 'application/json'
                 },
             })
-            alert("Post Deleted Sucessfully !!!")
-            navigate("/profile")
+            const a = toast.success("Post Deleted Sucessfully !!!", {
+                position: toast.POSITION.TOP_CENTER,
+                closeOnClick: false,
+                closeButton: false,
+                style: {
+                    color: "green",
+                    backgroundColor: "rgb(183, 248, 183)"
+                }
+            })
+            if (a == 1) {
+                setTimeout(() => {
+                    navigate("/profile")
+                }, 2000);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -46,6 +60,7 @@ const Post = (props) => {
     return (
         <>
             <NavBar name={`@${data.userName}`} />
+            <ToastContainer autoClose={1000} />
             <div className="mt-3" style={{ display: "flex", justifyContent: "center" }}>
                 <div className='card card-light col col-md-4 col-lg-4 col-sm-4 col-xs-12'>
                     <img src={post.image} class="card-img-top" alt="data" height="235px" />

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import NavBar from '../assets/NavBar'
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -26,8 +28,20 @@ const Auth = () => {
       setuserName("")
       setemail("")
       setpassword("")
-      alert("Welcome To Our Plateform !!!")
-      window.location.reload()
+      const a = toast.success("Welcome To Our Plateform !!!", {
+        position: toast.POSITION.TOP_CENTER,
+        closeOnClick: false,
+        closeButton: false,
+        style: {
+          color: "green",
+          backgroundColor: "rgb(183, 248, 183)"
+        }
+      })
+      if (a == 1) {
+        setTimeout(() => {
+          window.location.href="/"
+        }, 2000);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -45,7 +59,6 @@ const Auth = () => {
       })
       const data = await res.json();
       document.cookie = `jwt=${data.token}`
-      alert("Logged In !!!")
       navigate("/profile")
       setuserName("")
       setemail("")
@@ -105,6 +118,7 @@ const Auth = () => {
   return (
     <>
       <NavBar detail={"hidden"}/>
+      <ToastContainer autoClose={1000} />
       <div className={"Auth-form card-light mx-auto mt-5"}>
         <div className="Auth-form-content">
           <h3 className={"card-title text-center mb-2 text-dark"}>Sign Up</h3>

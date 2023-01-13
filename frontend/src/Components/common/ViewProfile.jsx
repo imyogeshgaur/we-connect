@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import NavBar from '../assets/NavBar'
-import {FaUserEdit} from "react-icons/fa"
+import { FaUserEdit } from "react-icons/fa"
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const ViewProfile = (props) => {
   const [data, setdata] = useState("")
@@ -20,7 +22,7 @@ const ViewProfile = (props) => {
   const token = document.cookie.split('=')[1];
 
   useEffect(() => {
-     //Find Logged In User Details
+    //Find Logged In User Details
     if (token === undefined) {
       navigate("/");
     } else {
@@ -48,7 +50,7 @@ const ViewProfile = (props) => {
           document.getElementById("template2").classList.add("hide")
         }
       })
-  }, [token,navigate,param.id])
+  }, [token, navigate, param.id])
 
   const handleSubmit = async () => {
     try {
@@ -65,8 +67,20 @@ const ViewProfile = (props) => {
         method: 'POST',
         body: formData
       })
-      alert("Details Updated !!!")
-      window.location.reload(false);
+      const a = toast.success("Details Updated !!!", {
+        position: toast.POSITION.TOP_CENTER,
+        closeOnClick: false,
+        closeButton: false,
+        style: {
+          color: "green",
+          backgroundColor: "rgb(183, 248, 183)"
+        }
+      })
+      if (a == 1) {
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 2000);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -86,22 +100,49 @@ const ViewProfile = (props) => {
         method: 'PUT',
         body: formData
       })
-      alert("Details Updated !!!")
-      window.location.reload(false);
+      const a = toast.success("Details Updated !!!", {
+        position: toast.POSITION.TOP_CENTER,
+        closeOnClick: false,
+        closeButton: false,
+        style: {
+          color: "green",
+          backgroundColor: "rgb(183, 248, 183)"
+        }
+      })
+      if (a == 1) {
+        setTimeout(() => {
+          window.location.reload(false);
+        }, 2000);
+      }
     } catch (error) {
       console.log(error);
+      const a = toast.error("Network Error !!!", {
+        position: toast.POSITION.TOP_CENTER,
+        closeOnClick: false,
+        closeButton: false,
+        style: {
+          color: "red",
+          backgroundColor: "rgb(255, 206, 206)"
+        }
+      })
+      if (a == 1) {
+        setTimeout(() => {
+          window.location.reload()
+        }, 2000);
+      }
     }
   }
 
   return (
     <>
       <NavBar name={`@${data.userName}`} secondOption={"View Post"} secondOptionURL={"/profile"} />
+      <ToastContainer autoClose={1000} />
       <div className="card mx-auto mt-4" style={{ width: "48rem" }}>
         <div className="card-body">
           <div className="wrapper mt-3" id='template1'>
             <div className="file-upload">
               <input type="file" id="userInput" onChange={(e) => setfile(e.target.files[0])} />
-              <FaUserEdit color={"black"} size={85} className="mx-auto"/>
+              <FaUserEdit color={"black"} size={85} className="mx-auto" />
             </div>
           </div>
           <div className="wrapper mt-3" id='template2'>

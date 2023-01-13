@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import NavBar from '../assets/NavBar'
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const AddPost = (props) => {
     const [data, setdata] = useState("")
@@ -30,20 +32,33 @@ const AddPost = (props) => {
             await fetch("http://localhost:5000/posts/createPost", {
                 method: 'POST',
                 mode: "cors",
-                headers:{
-                    'authorization':token
+                headers: {
+                    'authorization': token
                 },
                 body: formData
             })
-            alert("Uploaded !!!")
-            navigate("/profile")
+            const a = toast.success("Post Uploaded !!!", {
+                position: toast.POSITION.TOP_CENTER,
+                closeOnClick: false,
+                closeButton: false,
+                style: {
+                    color: "green",
+                    backgroundColor: "rgb(183, 248, 183)"
+                }
+            })
+            if (a == 1) {
+                setTimeout(() => {
+                    navigate("/profile")
+                }, 2000);
+            }
         } catch (error) {
             console.log(error);
         }
     }
     return (
         <>
-            <NavBar name={`@${data.userName}`}  secondOption={"View Profile"} secondOptionURL={`/viewDetail/${data._id}`}/>
+            <NavBar name={`@${data.userName}`} secondOption={"View Profile"} secondOptionURL={`/viewDetail/${data._id}`} />
+            <ToastContainer autoClose={1000} />
             <div className={"card mx-auto mt-4"} style={{ width: "38rem" }}>
                 <div className={"imageUpload-light"}>
                     <input type="file" name="" id="postImgInput" onChange={(e) => setfile(e.target.files[0])} />

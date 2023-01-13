@@ -9,12 +9,12 @@ import path from "path";
 
 createConnection();
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: 'http://localhost:5173'
   }));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept,Credentials');
     next();
   });

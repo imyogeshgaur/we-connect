@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import NavBar from '../assets/NavBar'
+import {FaUserEdit} from "react-icons/fa"
 
 const ViewProfile = (props) => {
   const [data, setdata] = useState("")
@@ -100,7 +101,7 @@ const ViewProfile = (props) => {
           <div className="wrapper mt-3" id='template1'>
             <div className="file-upload">
               <input type="file" id="userInput" onChange={(e) => setfile(e.target.files[0])} />
-              <i className="fa-solid fa-user"></i>
+              <FaUserEdit color={"black"} size={85} className="mx-auto"/>
             </div>
           </div>
           <div className="wrapper mt-3" id='template2'>

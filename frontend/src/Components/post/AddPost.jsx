@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import NavBar from '../assets/NavBar'
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import {BsImageFill} from "react-icons/bs"
 
 const AddPost = (props) => {
     const [data, setdata] = useState("")
@@ -57,13 +58,12 @@ const AddPost = (props) => {
     }
     return (
         <>
-            <NavBar name={`@${data.userName}`} secondOption={"View Profile"} secondOptionURL={`/viewDetail/${data._id}`} />
+            <NavBar name={`@${data.userName}`} secondOption={"View Profile"} secondOptionURL={`/viewDetail/${data._id}`} showPost={"none"}/>
             <ToastContainer autoClose={1000} />
-            <div className={"card mx-auto mt-4"} style={{ width: "38rem" }}>
+            <div className={"card mx-auto mt-4 card-light"} style={{ width: "38rem" }}>
                 <div className={"imageUpload-light"}>
                     <input type="file" name="" id="postImgInput" onChange={(e) => setfile(e.target.files[0])} />
-                    <i className={"fa-solid fa-image fa-3x mt-5"} style={{ display: 'flex', justifyContent: "center" }}></i>
-                    <h3 className={"mt-3"} style={{ display: 'flex', justifyContent: "center" }}>Add Image</h3>
+                    <BsImageFill style={{marginLeft:"17rem",marginTop:"3rem" }} size={78}/>
                 </div>
                 <div className="card-body">
                     <div className="mb-3">

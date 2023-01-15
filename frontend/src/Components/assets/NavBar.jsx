@@ -39,14 +39,14 @@ const NavBar = (props) => {
               <p className="navbar-brand mx-auto">{props.name === undefined ? "" : `Welcome ${props.name} To We Connect`}</p>
             </ul>
           </div>
-          <Link to="/addPost">
-            <MdAddBox color={"black"} size={37} className="me-4"/>
-          </Link>
         </div>
+        <Link to="/addPost" style={{display:props.showPost}}>
+          <MdAddBox color={"black"} size={37} className="me-4"/>
+        </Link>
         <Link to={`/chat/${props.name}`} style={{display:props.showChat}}>
         <HiChatBubbleOvalLeftEllipsis color={"black"} size={37} className="me-4"/>
         </Link>
-        <div className="dropdown">
+        <div className="dropdown" style={{display:props.showUser}}>
           <FaUser color={"black"} size={35} className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"/>
           <ul className="dropdown-menu card-light" style={{ marginLeft: "-5rem", marginTop: "0.6rem" }}>
             <Link to={props.secondOptionURL} style={{ textDecoration: "none" }}><li><button className="dropdown-item">{props.secondOption}</button></li></Link>

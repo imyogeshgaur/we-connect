@@ -1,9 +1,10 @@
 import { lazy } from "react";
 
 const Auth = lazy(() => import("./Components/auth/Auth"))
-const Profile = lazy(() => import("./Components/common/Profile"))
-const AddPost = lazy(() => import("./Components/common/AddPost"))
-const Post = lazy(() => import("./Components/common/Post"))
+const Profile = lazy(() => import("./Components/post/Profile"))
+const AddPost = lazy(() => import("./Components/post/AddPost"))
+const Post = lazy(() => import("./Components/post/Post"))
+const EditPost = lazy(() => import("./Components/post/EditPost"))
 const ViewProfile = lazy(() => import("./Components/common/ViewProfile"))
 const ForgetPassword = lazy(() => import("./Components/auth/ForgetPassword"))
 const ResetPassword = lazy(() => import("./Components/auth/ResetPassword"))
@@ -18,6 +19,7 @@ const Routes = [
     { path: "/profile", element: <Profile /> },
     { path: "/addPost", element: <AddPost /> },
     { path: "/post/:id", element: <Post /> },
+    { path: "/update/:id", element: <EditPost /> },
     { path: "/viewDetail/:id", element: <ViewProfile /> },
     { path: "/forgetPass", element: <ForgetPassword /> },
     { path: "/resetPass/:email", element: <ResetPassword /> },

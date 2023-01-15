@@ -35,14 +35,14 @@ const ViewProfile = (props) => {
     fetch("http://localhost:5000/auth/getUser/" + param.id)
       .then(res => res.json())
       .then(data => {
-        setuserName(data.auth.userName)
-        setname(data.user.name)
-        setemail(data.auth.email)
-        setphone(data.user.phone)
-        setlocation(data.user.location)
-        setcompany(data.user.company)
-        setposition(data.user.position)
-        setuser(data.user)
+        setuserName(data.auth.userName!==undefined ? data.auth.userName : "")
+        setemail(data.auth.email!==undefined ? data.auth.email : "")
+        setname(data.user.name!==undefined ? data.user.name : "")
+        setphone(data.user.phone!==undefined ? data.user.phone : "")
+        setlocation(data.user.location!==undefined ? data.user.location : "")
+        setcompany(data.user.company!==undefined ? data.user.company : "")
+        setposition(data.user.position!==undefined ? data.user.position : "")
+        setuser(data.user!==undefined ? data.user : "")
         if (data.user.image) {
           setimage(data.user.image)
           document.getElementById("template1").classList.add("hide")
@@ -127,7 +127,7 @@ const ViewProfile = (props) => {
       })
       if (a == 1) {
         setTimeout(() => {
-          window.location.reload()
+          navigate(`/viewDetail/${param.id}`)
         }, 2000);
       }
     }
@@ -137,12 +137,12 @@ const ViewProfile = (props) => {
     <>
       <NavBar name={`@${data.userName}`} secondOption={"View Post"} secondOptionURL={"/profile"} />
       <ToastContainer autoClose={1000} />
-      <div className="card mx-auto mt-4" style={{ width: "48rem" }}>
+      <div className="card mx-auto mt-4 card-light" style={{ width: "48rem" }}>
         <div className="card-body">
           <div className="wrapper mt-3" id='template1'>
             <div className="file-upload">
               <input type="file" id="userInput" onChange={(e) => setfile(e.target.files[0])} />
-              <FaUserEdit color={"black"} size={85} className="mx-auto" />
+              <FaUserEdit color={"white"} size={85} className="mx-auto"/>
             </div>
           </div>
           <div className="wrapper mt-3" id='template2'>

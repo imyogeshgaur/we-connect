@@ -30,14 +30,14 @@ const FriendList = () => {
   if (filteredVal === 0) {
     return (
       <>
-        <NavBar name={`@${data.userName}`} secondOption={"View Profile"} secondOptionURL={`/viewDetail/${data._id}`} />
+        <NavBar name={`@${data.userName}`} secondOption={"View Profile"} secondOptionURL={`/viewDetail/${data._id}`} showUser={"none"}/>
         <h1 className="text-center">No User Available !!!</h1>
       </>
     )
   }
   return (
     <>
-      <NavBar name={`@${data.userName}`} secondOption={"View Profile"} secondOptionURL={`/viewDetail/${data._id}`} />
+      <NavBar name={`@${data.userName}`} secondOption={"View Profile"} secondOptionURL={`/viewDetail/${data._id}`} showUser={"none"}/>
       <div className="row mt-4">
         {
           filteredVal.map((val) => {

@@ -29,15 +29,14 @@ const FriendRequest = () => {
   if (user.length === 0) {
     return (
       <>
-        <NavBar name={`@${data.userName}`} secondOption={"View Profile"} secondOptionURL={`/viewDetail/${data._id}`} />
+        <NavBar name={`@${data.userName}`} secondOption={"View Profile"} secondOptionURL={`/viewDetail/${data._id}`} showUser={"none"}/>
         <h1 className='text-center'>No Pending Request!!!</h1>
       </>
     )
   }
   return (
     <>
-      <NavBar name={`@${data.userName}`} secondOption={"View Profile"} secondOptionURL={`/viewDetail/${data._id}`} />
-
+      <NavBar name={`@${data.userName}`} secondOption={"View Profile"} secondOptionURL={`/viewDetail/${data._id}`} showUser={"none"}/>
       <div className="row mt-4">
         {
           user.map((val) => {

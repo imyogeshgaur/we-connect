@@ -4,7 +4,7 @@ import NavBar from '../assets/NavBar';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
-const Post = (props) => {
+const Post = () => {
     const param = useParams();
     const navigate = useNavigate();
     const [data, setdata] = useState("")
@@ -25,8 +25,9 @@ const Post = (props) => {
         //Find Post By Creator 
         fetch("http://localhost:5000/posts/findById/" + param.id)
             .then(res => res.json())
-            .then(post => setpost(post))
+            .then(post =>setpost(post))
             .catch(err => console.log(err))
+
     }, [token, navigate, param.id])
 
     const deletePost = async () => {
@@ -54,6 +55,20 @@ const Post = (props) => {
             }
         } catch (error) {
             console.log(error);
+            const a = toast.error("Network Error !!!", {
+                position: toast.POSITION.TOP_CENTER,
+                closeOnClick: false,
+                closeButton: false,
+                style: {
+                    color: "red",
+                    backgroundColor: "rgb(255, 206, 206)"
+                }
+            })
+            if (a == 1) {
+                setTimeout(() => {
+                    window.location.reload()
+                }, 2000);
+            }
         }
     }
 
@@ -68,6 +83,9 @@ const Post = (props) => {
                         <h5 class="card-title">{post.hashtag}</h5>
                         <p class="card-text">{post.caption}</p>
                         <button className="btn btn-danger me-3" onClick={deletePost}>Delete</button>
+                        <Link className="btn btn-success me-3" to={`/update/${param.id}`}>
+                            Edit
+                        </Link>
                         <Link to="/profile" class="btn btn-primary">Back</Link>
                     </div>
                 </div>

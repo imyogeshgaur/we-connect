@@ -1,6 +1,8 @@
 import friendRequest from "../model/request.entity";
 import User from "../model/user.entity";
 import Friend from "../model/friend.entity";
+import * as path from "path";
+import * as fs from "fs"
 
 export default class UsersService {
     async getAllUsers() {
@@ -42,6 +44,12 @@ export default class UsersService {
         try {
             const user = await User.findOne({ authId: id })
             if (user) {
+                if(user.image !== data.image){
+                    const imageUrl = user.image;
+                    const image = imageUrl.substr(43);
+                    const imagePath = path.join(process.cwd(), `src/images/${image}`)
+                    fs.unlinkSync(imagePath);
+                }
                 const result = await user.updateOne(data.data)
                 return result;
             }

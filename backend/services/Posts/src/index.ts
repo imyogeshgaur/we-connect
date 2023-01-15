@@ -21,7 +21,7 @@ app.use(function (req, res, next) {
 
 app.use("/static/post",express.static(path.join(process.cwd(),"src/images")))
 
-  app.get("/list", async(req, res) => {
+app.get("/list", async(req, res) => {
     try {
         const postController = new PostController();
         await postController.getAllPosts(req, res);
@@ -45,7 +45,6 @@ app.get("/findById/:post_id", async(req, res) => {
         console.log("Post's Service : Global Error " + error);
     }
 })
-
 app.post("/createPost",uploadPost,async(req, res) => {
     try {
         const postController = new PostController();
@@ -54,7 +53,7 @@ app.post("/createPost",uploadPost,async(req, res) => {
         console.log("Post's Service : Global Error " + error);
     }
 })
-app.put("/update/:created_by", async(req, res) => {
+app.put("/update/:id",uploadPost,async(req, res) => {
     try {
         const postController = new PostController();     
         await postController.updatePost(req, res);

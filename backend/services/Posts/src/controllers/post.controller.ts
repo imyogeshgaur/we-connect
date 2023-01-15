@@ -70,9 +70,12 @@ export default class PostController {
     
     async updatePost(req: Request, res: Response) {
         try {
-            const created_by = req.params.created_by;
+            const id = req.params.id;
             const data = req.body;
-            const updateResult = await this.postService.updatePost(created_by, data);
+            const file = process.env.USER_POST_PREFIX as string + req.file?.filename;
+            data.image = file
+            const actData = { data, image: file }
+            const updateResult = await this.postService.updatePost(id, actData);
             if (updateResult.modifiedCount) {
                 return res.status(200).send("Post Updated !!!")
             } else {

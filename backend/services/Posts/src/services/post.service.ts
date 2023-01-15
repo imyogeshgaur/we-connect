@@ -39,10 +39,16 @@ export default class PostsService {
         }
     }
 
-    async updatePost(created_by: string, data: any) {
+    async updatePost(id: string, data: any) {
         try {
-            const post = await Post.findOne({ created_by })
+            const post = await Post.findOne({ _id: id })
             if (post) {
+                if(post.image !== data.image){
+                    const imageUrl = post.image;
+                    const image = imageUrl.substr(40);
+                    const imagePath = path.join(process.cwd(), `src/images/${image}`)
+                    fs.unlinkSync(imagePath);
+                }
                 const result = await post.updateOne(data)
                 return result;
             }

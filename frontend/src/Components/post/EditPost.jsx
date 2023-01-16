@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import NavBar from '../assets/NavBar';
 
 const EditPost = () => {
-    //Todo : Edit Page Fix
     const [data, setdata] = useState("")
     const param = useParams();
     const [caption, setcaption] = useState("")
@@ -49,9 +48,9 @@ const EditPost = () => {
             formData.append("caption", caption);
             formData.append("post", file);
             const response = await fetch(`http://localhost:5000/posts/update/${param.id}`, {
+                mode: "cors",
                 method: 'PUT',
-                mode: 'cors',
-                data: formData
+                body: formData
             });
             const data = await response.json();
             if (data.message === "Post Updated !!!") {

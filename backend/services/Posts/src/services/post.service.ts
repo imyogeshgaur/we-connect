@@ -43,14 +43,21 @@ export default class PostsService {
         try {
             const post = await Post.findOne({ _id: id })
             if (post) {
-                if(post.image !== data.image){
-                    const imageUrl = post.image;
-                    const image = imageUrl.substr(40);
+                const dataUrl = data.image
+                const imageUrl = post.image;
+                const image = imageUrl.substr(40);
+                const dataImage = dataUrl.substr(40);
+                if (dataImage !== "undefined") {
                     const imagePath = path.join(process.cwd(), `src/images/${image}`)
                     fs.unlinkSync(imagePath);
+                    const result = await post.updateOne(data)
+                    console.log(result)
+                    return result;
+                } else {
+                    const result = await post.updateOne({ ...data, image: imageUrl })
+                    console.log(result)
+                    return result;
                 }
-                const result = await post.updateOne(data)
-                return result;
             }
         } catch (error) {
             console.log(error);

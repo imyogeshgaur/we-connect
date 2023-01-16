@@ -186,3 +186,8 @@ label {
   background-color: rgb(255, 0, 119);
   padding: 13px 13px;
 }
+
+.card{
+  width:38rem;
+  background: linear-gradient(to right, #ff9966, #ff5e62)!important;
+}

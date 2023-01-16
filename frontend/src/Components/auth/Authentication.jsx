@@ -4,7 +4,7 @@ import NavBar from '../assets/NavBar'
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
-const Auth = () => {
+const Authentication = () => {
   const navigate = useNavigate();
   const [authMode, setAuthMode] = useState("signin")
   const [userName, setuserName] = useState("")
@@ -172,4 +172,4 @@ const Auth = () => {
   )
 }
 
-export default Auth
+export default Authentication

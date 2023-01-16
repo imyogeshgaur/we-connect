@@ -8,12 +8,17 @@ const ChatWithFriend = () => {
     const [message, setMessage] = useState("")
     const [chat, setchat] = useState([])
     const navigate = useNavigate();
+    const token = document.cookie.split('=')[1];
 
-    if(param===undefined){
-        navigate("/")
-    }
+    useEffect(() => {
+        if (param === undefined || token === undefined) {
+            navigate("/unauthorized")
+        }
+    }, [param, token])
+
+
     const user = param.name;
-    
+
     const sendMessage = (e) => {
         const socket = io("http://localhost:8000")
         e.preventDefault()
@@ -28,7 +33,7 @@ const ChatWithFriend = () => {
     })
     return (
         <>
-        <NavBar name={`${user}`} showChat="none" />
+            <NavBar name={`${user}`} showChat="none" />
             <div className="mb-3">
                 {
                     chat.map((val, index) => {

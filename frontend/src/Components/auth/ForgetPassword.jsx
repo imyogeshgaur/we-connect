@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import NavBar from '../assets/NavBar'
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
@@ -66,9 +66,12 @@ const ForgetPassword = () => {
             />
           </div>
           <div className="d-grid gap-2 my-4">
-            <button type="submit" className="btn btn-danger" onClick={forgetPassApiCall}>
+            <button type="submit" className="btn btn-success" onClick={forgetPassApiCall}>
               Submit
             </button>
+            <Link className="btn btn-danger" to={"/"}>
+              Back To Login
+            </Link>
           </div>
         </div>
       </div>

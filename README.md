@@ -1,6 +1,6 @@
 # We Connect
 We connect is a social media platform for employees in which you can post,chat and send friend request to other employees.
-The application is built on **Micorserice architecture** using **typescript** in backend and **Reactjs** in frontend with **MongoDB** as Database
+The application is built on **Micorservice Architecture** using **Typescript** in backend and **Reactjs** in frontend with **MongoDB** as Database
 ##
 
 ### Folder Structure :

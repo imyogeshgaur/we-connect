@@ -5,8 +5,11 @@ The application is built on **Micorserice architecture** using **typescript** in
 
 ### Folder Structure :
 
+Backend :
+![Screenshot](Screenshot (90).png)
 
-
+Frontend :
+![Screenshot](Screenshot (91).png)
 
 ### Working of the application
 Step 1 : Create a gateway.env inside the gateway's service env folder (see folder structure) with following credentials

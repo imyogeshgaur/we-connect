@@ -46,3 +46,18 @@ Step 5 : Create a user.env inside the user's service env folder (see folder stru
   GET_AUTH_URI = http://localhost:5000/auth/list
   GET_SINGLE_AUTH_URI = http://localhost:5000/auth/getUser/
 ```
+After setting enviroments for each microservice and gateway we have to run individual service and gateway by following command
+```
+  cd backend/gateway/src
+  npm start
+```
+OR
+
+```
+ cd backend/service/service_name/src
+ npm start
+```
+Finally after sucessfully running all services and gateway we have to run frontend by follwing command
+```
+  cd frontend
+  npm start
